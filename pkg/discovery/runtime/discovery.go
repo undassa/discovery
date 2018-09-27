@@ -22,6 +22,7 @@ import (
 	"fmt"
 	"github.com/lastbackend/lastbackend/pkg/distribution/types"
 	"github.com/lastbackend/lastbackend/pkg/util/system"
+	"github.com/spf13/viper"
 	"os"
 )
 
@@ -47,6 +48,7 @@ func DiscoveryInfo() types.DiscoveryInfo {
 	info.OSType = osInfo.GoOS
 	info.OSName = fmt.Sprintf("%s %s", osInfo.OS, osInfo.Core)
 	info.Architecture = osInfo.Platform
+	info.Port = uint16(viper.GetInt("dns.port"))
 
 	return info
 }

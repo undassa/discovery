@@ -26,7 +26,6 @@ const logLevel = 3
 
 type State struct {
 	discovery *DiscoveryState
-	networks  *NetworkState
 }
 
 type DiscoveryState struct {
@@ -38,18 +37,10 @@ func (s *State) Discovery() *DiscoveryState {
 	return s.discovery
 }
 
-func (s *State) Networks() *NetworkState {
-	return s.networks
-}
-
-
 func New() *State {
 
 	state := State{
 		discovery: new(DiscoveryState),
-		networks: &NetworkState{
-			subnets: make(map[string]types.NetworkState, 0),
-		},
 	}
 
 	return &state

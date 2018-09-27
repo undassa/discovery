@@ -22,7 +22,6 @@ import (
 	"github.com/lastbackend/discovery/pkg/discovery/cache"
 	"github.com/lastbackend/discovery/pkg/discovery/state"
 	"github.com/lastbackend/lastbackend/pkg/api/client/types"
-	"github.com/lastbackend/lastbackend/pkg/runtime/cni"
 	"github.com/lastbackend/lastbackend/pkg/storage"
 )
 
@@ -33,19 +32,10 @@ type Env struct {
 	storage storage.Storage
 	cache   *cache.Cache
 	state   *state.State
-	cni     cni.CNI
 }
 
 func Get() *Env {
 	return &_env
-}
-
-func (c *Env) SetCNI(n cni.CNI) {
-	c.cni = n
-}
-
-func (c *Env) GetCNI() cni.CNI {
-	return c.cni
 }
 
 func (c *Env) SetStorage(storage storage.Storage) {

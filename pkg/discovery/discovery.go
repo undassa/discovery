@@ -31,7 +31,6 @@ import (
 	"github.com/lastbackend/discovery/pkg/discovery/state"
 	"github.com/lastbackend/lastbackend/pkg/api/client"
 	"github.com/lastbackend/lastbackend/pkg/log"
-	"github.com/lastbackend/lastbackend/pkg/runtime/cni/cni"
 	"github.com/lastbackend/lastbackend/pkg/storage"
 	"github.com/spf13/viper"
 )
@@ -45,14 +44,7 @@ func Daemon() bool {
 
 	log.New(viper.GetInt("verbose"))
 	log.Info("Start service discovery")
-
-	_cni, err := cni.New()
-	if err != nil {
-		log.Errorf("Cannot initialize cni: %v", err)
-	}
-
-	envs.Get().SetCNI(_cni)
-
+	
 	st := state.New()
 	envs.Get().SetState(st)
 	st.Discovery().Info = runtime.DiscoveryInfo()
