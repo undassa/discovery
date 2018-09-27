@@ -80,6 +80,11 @@ func (c *Controller) Sync(ctx context.Context) error {
 	for range ticker.C {
 		opts := new(request.DiscoveryStatusOptions)
 
+		status := envs.Get().GetState().Discovery().Status
+		opts.IP  = status.IP
+		opts.Port = status.Port
+		opts.Ready = status.Ready
+
 		err := envs.Get().GetClient().SetStatus(ctx, opts)
 		if err != nil {
 			log.Errorf("discovery:exporter:dispatch err: %s", err.Error())

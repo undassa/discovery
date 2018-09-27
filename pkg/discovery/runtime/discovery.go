@@ -48,7 +48,6 @@ func DiscoveryInfo() types.DiscoveryInfo {
 	info.OSType = osInfo.GoOS
 	info.OSName = fmt.Sprintf("%s %s", osInfo.OS, osInfo.Core)
 	info.Architecture = osInfo.Platform
-	info.Port = uint16(viper.GetInt("dns.port"))
 
 	return info
 }
@@ -56,6 +55,16 @@ func DiscoveryInfo() types.DiscoveryInfo {
 func DiscoveryStatus() types.DiscoveryStatus {
 
 	var state = types.DiscoveryStatus{}
+
+	ip, err := system.GetHostIP()
+	if err != nil {
+		_ = fmt.Errorf("get ip err: %s", err)
+	}
+
+
+	state.Port = uint16(viper.GetInt("dns.port"))
+	state.IP = ip
+
 	return state
 }
 

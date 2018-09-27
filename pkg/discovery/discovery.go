@@ -44,7 +44,7 @@ func Daemon() bool {
 
 	log.New(viper.GetInt("verbose"))
 	log.Info("Start service discovery")
-	
+
 	st := state.New()
 	envs.Get().SetState(st)
 	st.Discovery().Info = runtime.DiscoveryInfo()
@@ -98,6 +98,8 @@ func Daemon() bool {
 	if err != nil {
 		log.Fatalf("Start discovery server error: %v", err)
 	}
+
+	st.Discovery().Status.Ready = true
 
 	// Handle SIGINT and SIGTERM.
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
