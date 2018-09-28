@@ -26,6 +26,7 @@ import (
 	"github.com/lastbackend/lastbackend/pkg/distribution/types"
 	"github.com/lastbackend/lastbackend/pkg/log"
 	"github.com/lastbackend/lastbackend/pkg/util/system"
+	"github.com/spf13/viper"
 )
 
 const (
@@ -51,7 +52,8 @@ func (r *Runtime) Loop() error {
 		return err
 	}
 
-	ip, err := system.GetHostIP()
+	iface := viper.GetString("runtime.interface")
+	ip, err := system.GetHostIP(iface)
 	if err != nil {
 		log.Errorf(" can not get discovery ip:%s", err.Error())
 		return err

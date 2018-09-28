@@ -38,7 +38,8 @@ func DiscoveryInfo() types.DiscoveryInfo {
 		_ = fmt.Errorf("get hostname err: %s", err)
 	}
 
-	ip, err := system.GetHostIP()
+	iface := viper.GetString("runtime.interface")
+	ip, err := system.GetHostIP(iface)
 	if err != nil {
 		_ = fmt.Errorf("get ip err: %s", err)
 	}
@@ -56,7 +57,8 @@ func DiscoveryStatus() types.DiscoveryStatus {
 
 	var state = types.DiscoveryStatus{}
 
-	ip, err := system.GetHostIP()
+	iface := viper.GetString("runtime.interface")
+	ip, err := system.GetHostIP(iface)
 	if err != nil {
 		_ = fmt.Errorf("get ip err: %s", err)
 	}

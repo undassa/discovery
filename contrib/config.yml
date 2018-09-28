@@ -17,8 +17,7 @@ etcd:
 
 # Runtime
 runtime:
-  cni:
-    type: "vxlan"
+  interface: "eth1"
 
 dns:
   host: 0.0.0.0
