@@ -80,7 +80,7 @@ func Daemon() bool {
 			log.Errorf("Init client err: %s", err)
 		}
 
-		c := rest.V1().Discovery(st.Discovery().Info.Hostname)
+		c := rest.V1().Cluster().Discovery(st.Discovery().Info.Hostname)
 		envs.Get().SetClient(c)
 		ctl := controller.New(r)
 
